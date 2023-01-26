@@ -33,6 +33,12 @@ public class AccountController : ControllerBase
 	[HttpPost("transfer", Name = "Transfer")]
 	public IActionResult Transfer(MyTransferDto transfer)
 	{
+		if (transfer.DebtorAccountIdentifier.Trim() ==
+		    transfer.CreditorAccountIdentifier.Trim())
+		{
+			return BadRequest("Credit and Debitor account identifiers cannot be the same.");
+		}
+
 		_accountProvider.Transfer(transfer);
 		return Accepted();
 	}

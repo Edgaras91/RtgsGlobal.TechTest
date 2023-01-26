@@ -87,4 +87,12 @@ public class BankAccountTests : IClassFixture<WebApplicationFactory<Program>>
 
 		Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
 	}
+
+	[Fact]
+	public async Task GivenAccountExists_WhenTransferBetweenSameAccountsIsMade_BadRequestShouldBeReturned()
+	{
+		var result = await _client.PostAsJsonAsync("/account/transfer", new MyTransferDto("account-a", "account-a", 1000));
+
+		Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
+	}
 }
