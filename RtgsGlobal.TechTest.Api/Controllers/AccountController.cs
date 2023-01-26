@@ -16,6 +16,9 @@ public class AccountController : ControllerBase
 	[HttpPost("{accountIdentifier}", Name = "Deposit")]
 	public IActionResult Deposit(string accountIdentifier, [FromBody] decimal amount)
 	{
+		if (amount < 0)
+			return BadRequest("amount cannot be less than 0");
+
 		_accountProvider.Deposit(accountIdentifier, amount);
 		return Ok();
 	}

@@ -1,4 +1,5 @@
 using RtgsGlobal.TechTest.Api.Controllers;
+using RtgsGlobal.TechTest.Api.Exceptions;
 
 namespace RtgsGlobal.TechTest.Api;
 

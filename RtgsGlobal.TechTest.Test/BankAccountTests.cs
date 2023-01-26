@@ -79,4 +79,12 @@ public class BankAccountTests : IClassFixture<WebApplicationFactory<Program>>
 		var exception = await Assert.ThrowsAsync<HttpRequestException>(async () => await _client.GetFromJsonAsync<MyBalance>("/account/account-z"));
 		Assert.Equal(HttpStatusCode.NotFound, exception.StatusCode);
 	}
+
+	[Fact]
+	public async Task GivenAccountExists_WhenNegativeDepositIsAdded_BadRequestShouldBeReturned()
+	{
+		var result = await _client.PostAsJsonAsync("/account/account-a", "-1000");
+
+		Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
+	}
 }
