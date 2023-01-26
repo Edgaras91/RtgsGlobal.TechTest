@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -70,5 +71,12 @@ public class BankAccountTests : IClassFixture<WebApplicationFactory<Program>>
 
 		Assert.Equal(-1000, accountA.Balance);
 		Assert.Equal(1000, accountB.Balance);
+	}
+
+	[Fact]
+	public async Task GivenAccountDoesNotExist_GetBalance_ShouldReturnNotFoundStatus()
+	{
+		var exception = await Assert.ThrowsAsync<HttpRequestException>(async () => await _client.GetFromJsonAsync<MyBalance>("/account/account-z"));
+		Assert.Equal(HttpStatusCode.NotFound, exception.StatusCode);
 	}
 }
