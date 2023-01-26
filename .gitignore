@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/RtgsGlobal.TechTest.Api/obj
+/RtgsGlobal.TechTest.Api/bin
+/RtgsGlobal.TechTest.Test/bin
+/RtgsGlobal.TechTest.Test/obj
+*.user
